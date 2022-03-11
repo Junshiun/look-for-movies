@@ -11,6 +11,9 @@ const URL_IMG = "https://image.tmdb.org/t/p/w500"
 
 const HIGHTLIGHT_NUM = 8;
 
+const TREND = "Now Trending";
+const SEARCH = "Search Results for"
+
 var current_address = window.location.href;
 var url_main = new URL(current_address);
 var lfm_page = url_main.searchParams.get("lfm_page");
@@ -22,6 +25,11 @@ if (lfm_page_num === null)
 else
     lfm_page_num = parseInt(lfm_page_num);
 
+var state = {
+    current: TREND,
+    search: ""
+}
+
 get_address();
 
 function get_address() {
@@ -29,8 +37,10 @@ function get_address() {
     switch (true){
 
     case /search/.test(lfm_page):
-        document.getElementById("ss-container").remove();
+        //document.getElementById("ss-container").remove();
+        document.getElementById("top").innerHTML = `<div class="for-margin"></div>`
         document.getElementById("main-container").classList.add("search");
+        state.current = SEARCH;
         search_fetch();
         break;
 
@@ -43,6 +53,7 @@ function get_address() {
 
     default:
         //fetch on load: slider
+        state.current = TREND;
         call_fetch = fetchAPI(slide);
         call_fetch(URL_TRENDING);
         slide_run();
@@ -99,9 +110,23 @@ function updateSearch(e) {
 function search_fetch() {
     let query = url_main.searchParams.get("search");
 
+    let breakdown = query.split("+");
+    breakdown = breakdown.join(" ");
+
+    state.search = breakdown;
+
     call_fetch = fetchAPI(listMovies);
     call_fetch(URL_SEARCH + query + "&page=" + lfm_page_num);
 }
+
+//load main container title
+function container_title () {
+    let title = document.getElementById("container-title");
+
+    title.innerText = `${state.current} ${(state.current==TREND)? "": "'" + state.search + "'"}`
+}
+
+container_title();
 
 /*
 function break_keyword(keyword) {
@@ -185,6 +210,7 @@ async function get_info(packet) {
     return {id, title, overview, poster_path, backdrop_path, hide_image, company_logo, company_name, cast, vote_average}
 }
 
+/*
 //slideshow
 function slide(data) {
     let results = data.results;
@@ -204,12 +230,55 @@ function slide(data) {
                 <img class="hl-image" src="${backdrop_path}">
             </div>
             <div id="hld-${index}" class="hl-description">
-                <h1 class="hl-title">${title}</h1>
+                <h1 id="ss-movie-${id}" class="hl-title">${title}</h1>
                 <p class="hl-overview">${overview}</p>
             </div>
         `
         
         hl_container.innerHTML += html_text;
+
+        document.getElementById(`ss-movie-${id}`).addEventListener("click", (e) => {e.preventDefault(); enter_movie(id)})
+    })
+}*/
+
+
+//slideshow
+function slide(data) {
+    let results = data.results;
+
+    let highlight = results.splice(0, HIGHTLIGHT_NUM);
+
+    let hl_container = document.getElementById("ss-movie-container");
+
+    highlight.map(async (movie, index) => {
+
+        let each_movie = document.createElement("div")
+
+        if (index === 0){
+            each_movie.className = "show";
+        }
+        else {
+            each_movie.className = "hide";
+        }
+
+        each_movie.setAttribute("id", "container-" + index)
+
+        let {id, title, overview, poster_path, backdrop_path, hide_image, company_logo, company_name, cast, vote_average} = await get_info(movie);
+
+        let each_movie_text = `
+            <div id="hli-${index}" class="hli-box">
+                <img class="hl-image" src="${backdrop_path}">
+            </div>
+            <div id="hld-${index}" class="hl-description">
+                <h1 id="ss-movie-${id}" class="hl-title">${title}</h1>
+                <p class="hl-overview">${overview}</p>
+            </div>
+        `
+        each_movie.innerHTML = each_movie_text;
+
+        hl_container.appendChild(each_movie);
+
+        document.getElementById(`ss-movie-${id}`).addEventListener("click", (e) => {e.preventDefault(); enter_movie(id)})
     })
 }
 
@@ -242,10 +311,9 @@ function slide_run() {
         clearInterval(change); 
     });
 
-    /*
     document.querySelector('.ss-container').addEventListener('mouseenter',function(){
         clearInterval(change); 
-    });*/
+    });
 
     document.querySelector('.ss-container').addEventListener('mouseleave',function(){
         change = setInterval(function() {slide_sequence(++seq_number)}, 6000);

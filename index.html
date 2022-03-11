@@ -16,37 +16,45 @@
 
     <link rel="stylesheet" href="headfoot.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main-mobile.css">
 
 </head>
 <body>
     <header>
         <a class="LFM" href="index.html">LFM</a>
         <form id="form">
-            <input id="search" for="search" placeholder="movies">
-            <input id="submit" type="submit" value="Search">
+            <input id="search" name="search" placeholder="movies">
+            <button id="submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     </header>
 
-    <div id="ss-container" class="ss-container">
-        <div id="for-buttons">
-            <button id="ss-previous" class="btn"><i class="fa fa-angle-left"></i></button>
-            <button id="ss-next" class="btn"><i class="fa fa-angle-right"></i></button>
-            <div id="bar"></div>
+    <wrapper id="top">
+        <div id="ss-container" class="ss-container">
+            <div id="for-buttons">
+                <button id="ss-previous" class="btn"><i class="fa fa-angle-left"></i></button>
+                <button id="ss-next" class="btn"><i class="fa fa-angle-right"></i></button>
+                <div id="bar"></div>
+            </div>
+            <div id="ss-movie-container">
+                <!--<div id="container-0" class="show"></div>
+                <div id="container-1" class="hide"></div>
+                <div id="container-2" class="hide"></div>
+                <div id="container-3" class="hide"></div>
+                <div id="container-4" class="hide"></div>
+                <div id="container-5" class="hide"></div>
+                <div id="container-6" class="hide"></div>
+                <div id="container-7" class="hide"></div>-->
+            </div>
         </div>
-        <div id="container-0" class="show"></div>
-        <div id="container-1" class="hide"></div>
-        <div id="container-2" class="hide"></div>
-        <div id="container-3" class="hide"></div>
-        <div id="container-4" class="hide"></div>
-        <div id="container-5" class="hide"></div>
-        <div id="container-6" class="hide"></div>
-        <div id="container-7" class="hide"></div>
-    </div>
+    </wrapper>
 
     <div id="line"></div>
 
     <wrapper class="wrap">
-        <div id="main-container" class="main-container">
+        <div id="container-title"></div>
+        <div id="main-container-wrap">
+            <div id="main-container" class="main-container">
+        </div>
         </div>
     </wrapper>
 
