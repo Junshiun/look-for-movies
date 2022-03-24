@@ -11,8 +11,8 @@ const URL_IMG = "https://image.tmdb.org/t/p/w500"
 
 const HIGHTLIGHT_NUM = 8;
 
-const TREND = "Now Trending";
-const SEARCH = "Search Results for"
+const TREND = "NOW TRENDING";
+const SEARCH = "Results for"
 
 var current_address = window.location.href;
 var url_main = new URL(current_address);
@@ -37,7 +37,7 @@ function get_address() {
     switch (true){
 
     case /search/.test(lfm_page):
-        //document.getElementById("ss-container").remove();
+        document.getElementById("line").remove();
         document.getElementById("top").innerHTML = `<div class="for-margin"></div>`
         document.getElementById("main-container").classList.add("search");
         state.current = SEARCH;
@@ -121,9 +121,14 @@ function search_fetch() {
 
 //load main container title
 function container_title () {
-    let title = document.getElementById("container-title");
+    let title = document.getElementById("titleText");
 
-    title.innerText = `${state.current} ${(state.current==TREND)? "": "'" + state.search + "'"}`
+    title.innerHTML += `${state.current} ${(state.current==TREND)? "": "'" + state.search + "'"}`
+
+    if(state.current==TREND)
+        title.className = "trending"
+    else
+        title.className = "others"
 }
 
 container_title();
@@ -462,7 +467,9 @@ function page_director(pages) {
         }
         page.innerHTML = i;
 
-        page.addEventListener("click", function(){page_select(i)});
+        if (i !== current_page){
+            page.addEventListener("click", function(){page_select(i)});
+        }
 
         pages_bar.appendChild(page);
     }

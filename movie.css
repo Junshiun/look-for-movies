@@ -2,8 +2,10 @@
     --column-num: 3;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,300&display=swap');
+
 * {
-    font-family: Source Sans Pro, Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 #main-wrap {
@@ -49,6 +51,18 @@
     height: fit-content;
     padding: 1em 1em 0 1em;
     z-index: 2;
+}
+
+#main #title {
+    font-weight: 600;
+}
+
+#main #tagline {
+    margin-bottom: 50px;
+}
+
+.info-box a {
+    word-wrap: break-word;
 }
 
 #main #trailer {

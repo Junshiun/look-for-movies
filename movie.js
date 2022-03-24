@@ -47,7 +47,7 @@ async function get_info(results) {
 
     const videos = results.videos.results;
 
-    console.log(videos);
+    //console.log(videos);
 
     let producers = [];
     let writers = [];
@@ -83,6 +83,9 @@ async function get_info(results) {
 
 async function build_page(results) {
     const {backdrop_path, genres, homepage, original_language, overview, poster_path, production_companies, release_date, runtime, tagline, title, vote_average, vote_count, cast, writers, directors, producers, trailer} = await get_info(results);
+
+    //Title
+    document.getElementsByTagName("title")[0].innerText = title;
 
     //backdrop
     document.querySelector("#main .background").style.background = `url('${URL_IMG}${backdrop_path}')`; 
@@ -150,7 +153,7 @@ async function build_page(results) {
         for (let i=0; i<8 && i<cast.length; i++){
             for_cast += `${cast[i].name}`;
 
-            if (i != cast.length-1 && i!=9)
+            if (i != cast.length-1 && i!=7)
                 for_cast += ", ";
         }
         for_cast += "</p>";
@@ -200,6 +203,3 @@ async function build_page(results) {
     if (trailer == "")
         document.getElementById("trailer").remove();
 }
-
-
-
