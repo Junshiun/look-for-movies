@@ -80,6 +80,7 @@
 }
 
 .hl-title {
+    font-size: var(--header-2);
     cursor: pointer;
 }
 
@@ -183,7 +184,7 @@
     position: relative;
     width: fit-content;
     padding: 0 10px 0 10px;
-    font-size: 18px;
+    font-size: var(--header-2);
 }
 
 #titleText.trending {

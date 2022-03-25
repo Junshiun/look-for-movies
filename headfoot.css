@@ -1,12 +1,15 @@
 :root {
     --column-num: 3;
+    --header-1: 16px;
+    --header-2: 18px;
+    --text-1: 12px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,300&display=swap');
 
 * {
     font-family: 'Nunito', sans-serif;
-    font-size: 14px;
+    font-size: var(--text-1);
 }
 
 body {
@@ -35,8 +38,8 @@ header {
     color: aqua;
     text-decoration: none;
     margin-left: 16px;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: var(--header-1);
+    line-height: var(--header-1);
     font-weight: 1000;
     vertical-align: bottom;
 }
@@ -82,10 +85,10 @@ header {
     align-items: center;
     justify-content: center;
     align-self: flex-end;
-    height: 5em;
+    height: 70px;
     background-color: black;
     color: white;
-    bottom: -80px;
+    bottom: -70px;
     margin-bottom: 0;
     width: 100%;
     z-index: 1;

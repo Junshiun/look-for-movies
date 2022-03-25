@@ -55,6 +55,7 @@
 
 #main #title {
     font-weight: 600;
+    font-size: var(--header-2);
 }
 
 #main #tagline {
