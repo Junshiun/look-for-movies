@@ -115,8 +115,6 @@
 #ss-previous > i ,
 #ss-next > i 
 {
-    width: 100%;
-    height: 100%;
     color: white;
 
     box-sizing: border-box;
