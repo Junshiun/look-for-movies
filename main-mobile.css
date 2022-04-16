@@ -70,6 +70,20 @@
         background-image: linear-gradient(to top, black 10%, transparent);
         z-index: 1;
     }
+
+    #pages {
+        padding-right: 0;
+    }
+    
+    .page-button {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+        margin: 5px;
+    }
+
+    #page-previous, #page-next {
+        width: 60px;
+    }
 }
 
 /*
