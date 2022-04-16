@@ -339,20 +339,20 @@ function slide_run() {
     let touchStart = 0;
     let touchEnd = 0;
 
-    document.getElementById("for-buttons").addEventListener("touchstart", (e) => {
+    document.getElementById("touch").addEventListener("touchstart", (e) => {
         touchStart = e.changedTouches[0].screenX;
     })
 
-    document.getElementById("for-buttons").addEventListener("touchend", (e) => {
+    document.getElementById("touch").addEventListener("touchend", (e) => {
         touchEnd = e.changedTouches[0].screenX;
         handSlide();
     })
 
     function handSlide() {
         clearInterval(change);
-        if (touchEnd > touchStart)
+        if ((touchEnd - touchStart) > 50)
             seq_number--;
-        else 
+        else if ((touchStart - touchEnd) > 50)
             seq_number++;
         slide_sequence(seq_number);
     }
