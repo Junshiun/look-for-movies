@@ -336,6 +336,27 @@ function slide_run() {
         slide_sequence(seq_number);
     });
 
+    let touchStart = 0;
+    let touchEnd = 0;
+
+    document.getElementById("for-buttons").addEventListener("touchstart", (e) => {
+        touchStart = e.changedTouches[0].screenX;
+    })
+
+    document.getElementById("for-buttons").addEventListener("touchend", (e) => {
+        touchEnd = e.changedTouches[0].screenX;
+        handSlide();
+    })
+
+    function handSlide() {
+        clearInterval(change);
+        if (touchEnd > touchStart)
+            seq_number--;
+        else 
+            seq_number++;
+        slide_sequence(seq_number);
+    }
+
     function dot() {
         let bar = document.getElementById('bar');
 
